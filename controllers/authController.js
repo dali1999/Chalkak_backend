@@ -13,6 +13,7 @@ module.exports = {
         req.body.password,
         process.env.SECRET
       ).toString(),
+      role: req.body.role,
     });
 
     try {
