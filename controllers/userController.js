@@ -16,7 +16,7 @@ module.exports = {
       const users = await User.find().sort({ createdAt: -1 });
       res.status(200).json(users);
     } catch (error) {
-      res.status(500).json("failed to get product");
+      res.status(500).json("failed to get users");
     }
   },
 
@@ -49,7 +49,7 @@ module.exports = {
             },
           },
         },
-      ]); 
+      ]);
 
       res.status(200).json(result);
       console.log("Search key:", req.params.key);
