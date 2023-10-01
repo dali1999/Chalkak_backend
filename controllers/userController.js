@@ -40,12 +40,10 @@ module.exports = {
       const result = await User.aggregate([
         {
           $search: {
-            index: "user",
+            index: "UserSchema",
             text: {
               query: req.params.key,
-              path: {
-                wildcard: "*",
-              },
+              path: "username",
             },
           },
         },
@@ -54,6 +52,7 @@ module.exports = {
       res.status(200).json(result);
       console.log("Search key:", req.params.key);
     } catch (error) {
+      console.error("Error searching users:", error);
       res.status(500).json("failed to get user");
     }
   },
