@@ -14,6 +14,7 @@ module.exports = {
         process.env.SECRET
       ).toString(),
       role: req.body.role,
+      category: req.body.category,
     });
 
     try {
