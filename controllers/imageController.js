@@ -1,4 +1,5 @@
 const Image = require("../models/Image");
+const User = require("../models/User");
 
 module.exports = {
   deleteImage: async (req, res) => {
@@ -22,10 +23,13 @@ module.exports = {
 
   uploadImage: async (req, res) => {
     try {
+      const userId = await req.params.id;
+      console.log(userId);
       // 이미지를 MongoDB에 저장
       const image = new Image({
         data: req.file.buffer, // 이미지 데이터
         contentType: req.file.mimetype, // 이미지 타입
+        user: userId,
       });
 
       await image.save();
@@ -39,7 +43,8 @@ module.exports = {
 
   getImages: async (req, res) => {
     try {
-      const images = await Image.find();
+      const images = await Image.find({}, "-data -__v");
+
       res.status(200).json(images);
     } catch (error) {
       res.status(500).json("failed to get images");

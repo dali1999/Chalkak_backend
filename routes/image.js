@@ -7,7 +7,7 @@ const upload = multer({ storage: storage });
 
 router.delete("/delete/:id", imageController.deleteImage);
 router.delete("/delete", imageController.deleteAllImage);
-router.post("/upload", upload.single("image"), imageController.uploadImage);
+router.post("/upload/:id", upload.single("image"), imageController.uploadImage);
 
 router.get("/", imageController.getImages);
 
