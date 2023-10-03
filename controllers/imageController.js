@@ -1,6 +1,25 @@
 const Image = require("../models/Image");
 
 module.exports = {
+  deleteImage: async (req, res) => {
+    try {
+      await Image.findByIdAndDelete(req.params.id);
+
+      res.status(200).json("Successfully Deleted");
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  deleteAllImage: async (req, res) => {
+    try {
+      await Image.deleteMany({}); // Delete all documents in the Image collection
+      res.status(200).json("All images deleted successfully");
+    } catch (error) {
+      console.error("Error deleting all images:", error); // Log the error
+      res.status(500).json({ message: "Image delete failed" });
+    }
+  },
+
   uploadImage: async (req, res) => {
     try {
       // 이미지를 MongoDB에 저장
