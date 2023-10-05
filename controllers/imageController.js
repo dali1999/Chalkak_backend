@@ -25,16 +25,17 @@ module.exports = {
     try {
       const userId = await req.params.id;
       console.log(userId);
-      // console.log(req.file);
+      console.log(req.path);
 
       // 이미지를 MongoDB에 저장
       const image = new Image({
         uri: req.file.path,
+        name: req.file.filename,
         data: req.file.buffer, // 이미지 데이터
         contentType: req.file.mimetype, // 이미지 타입
         user: userId,
       });
-      // console.log(uri);
+      console.log(req.file.filename);
       // uri: `https://abd3-175-117-199-226.ngrok-free.app/${req.file.path}`,
 
       await image.save();
