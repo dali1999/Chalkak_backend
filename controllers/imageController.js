@@ -25,12 +25,17 @@ module.exports = {
     try {
       const userId = await req.params.id;
       console.log(userId);
+      // console.log(req.file);
+
       // 이미지를 MongoDB에 저장
       const image = new Image({
+        uri: req.file.path,
         data: req.file.buffer, // 이미지 데이터
         contentType: req.file.mimetype, // 이미지 타입
         user: userId,
       });
+      // console.log(uri);
+      // uri: `https://abd3-175-117-199-226.ngrok-free.app/${req.file.path}`,
 
       await image.save();
 
@@ -41,6 +46,21 @@ module.exports = {
     }
   },
 
+  getuserImages: async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const userImages = await Image.find(
+        { user: userId },
+        "-data -__v"
+      ).exec();
+      if (!userImages) {
+        return res.status(404).json({ message: "User images not found" });
+      }
+      res.status(200).json(userImages);
+    } catch (error) {
+      res.status(500).json("failed to get user images");
+    }
+  },
   getImages: async (req, res) => {
     try {
       const images = await Image.find({}, "-data -__v");
