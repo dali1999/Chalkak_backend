@@ -1,5 +1,6 @@
 const express = require("express");
-const router = require("express").Router();
+const http = require("http");
+const socketIo = require("socket.io");
 
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -7,13 +8,33 @@ const multer = require("multer");
 const app = express();
 const path = require("path");
 
+const server = http.createServer(app);
+const io = socketIo(server);
+
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const imageRouter = require("./routes/image");
-const imageController = require("./controllers/imageController");
 
 const port = 3000;
 
+// Set up the socket.io connection event.
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  // Handle custom chat message event.
+  socket.on("chat message", (newMessage) => {
+    console.log("Received new message:", newMessage);
+    // Broadcast the message to all connected clients, including the sender.
+    io.emit("chat message", message);
+  });
+
+  // Handle disconnect event.
+  socket.on("disconnect", () => {
+    console.log("A user disconnected");
+  });
+});
+
+//public directory for images
 app.use(express.static(path.join(__dirname, "public")));
 
 dotenv.config();
