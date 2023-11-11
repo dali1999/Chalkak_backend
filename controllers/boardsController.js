@@ -1,6 +1,5 @@
 // controllers/boardsController.js
 
-// 모델 임포트 (실제 모델로 교체해야 함)
 const Board = require("../models/Boards");
 const Post = require("../models/Post");
 
