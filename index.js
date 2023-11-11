@@ -14,6 +14,7 @@ const io = socketIo(server);
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const imageRouter = require("./routes/image");
+const boardsRouter = require("./routes/boards");
 
 const port = 3000;
 
@@ -49,6 +50,7 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use("/api/", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/images", imageRouter);
+app.use("/api/boards", boardsRouter);
 
 app.listen(process.env.PORT || port, () =>
   console.log(`Example app listening on port ${process.env.PORT}!`)
