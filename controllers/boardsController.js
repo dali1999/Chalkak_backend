@@ -2,6 +2,7 @@
 
 const Board = require("../models/Boards");
 const Post = require("../models/Post");
+const Board = require("../models/Boards");
 
 const boardsController = {
   // 모든 게시판 목록을 가져오는 함수
@@ -64,5 +65,14 @@ const boardsController = {
     }
   },
 };
-
+exports.createBoard = async (req, res) => {
+  try {
+    const { name, description } = req.body;
+    const newBoard = new Board({ name, description });
+    const savedBoard = await newBoard.save();
+    res.status(201).json(savedBoard);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 module.exports = boardsController;
