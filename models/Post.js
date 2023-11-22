@@ -17,7 +17,7 @@ const postSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "User", // 가정으로 추가한 필드, 실제 User 모델이 존재해야 함
+    ref: "User",
   },
   createdAt: {
     type: Date,
