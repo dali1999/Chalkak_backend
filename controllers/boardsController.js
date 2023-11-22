@@ -8,7 +8,7 @@ const boardsController = {
   // 모든 게시판 목록을 가져오는 함수
   getAllBoards: async (req, res) => {
     try {
-      const boards = await Board.find({});
+      const boards = await Board.find();
       res.json(boards);
     } catch (error) {
       res.status(500).json({ message: error.message });

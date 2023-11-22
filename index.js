@@ -18,22 +18,22 @@ const boardsRouter = require("./routes/boards");
 
 const port = 3000;
 
-// Set up the socket.io connection event.
-io.on("connection", (socket) => {
-  console.log("A user connected");
+// // Set up the socket.io connection event.
+// io.on("connection", (socket) => {
+//   console.log("A user connected");
 
-  // Handle custom chat message event.
-  socket.on("chat message", (newMessage) => {
-    console.log("Received new message:", newMessage);
-    // Broadcast the message to all connected clients, including the sender.
-    io.emit("chat message", message);
-  });
+//   // Handle custom chat message event.
+//   socket.on("chat message", (newMessage) => {
+//     console.log("Received new message:", newMessage);
+//     // Broadcast the message to all connected clients, including the sender.
+//     io.emit("chat message", message);
+//   });
 
-  // Handle disconnect event.
-  socket.on("disconnect", () => {
-    console.log("A user disconnected");
-  });
-});
+//   // Handle disconnect event.
+//   socket.on("disconnect", () => {
+//     console.log("A user disconnected");
+//   });
+// });
 
 //public directory for images
 app.use(express.static(path.join(__dirname, "public")));

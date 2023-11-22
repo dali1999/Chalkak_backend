@@ -43,7 +43,7 @@ module.exports = {
             index: "UserSchema",
             text: {
               query: req.params.key,
-              path: "username",
+              path: ["location", "username", "category"],
             },
           },
         },

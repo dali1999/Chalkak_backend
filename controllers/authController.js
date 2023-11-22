@@ -16,7 +16,7 @@ module.exports = {
       role: req.body.role,
       category: req.body.category,
     });
-
+    console.log(req.body.category);
     try {
       await newUser.save();
       // (201): created
