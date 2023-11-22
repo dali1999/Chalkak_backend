@@ -1,6 +1,4 @@
 // controllers/boardsController.js
-
-const Board = require("../models/Boards");
 const Post = require("../models/Post");
 const Board = require("../models/Boards");
 

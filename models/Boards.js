@@ -16,6 +16,6 @@ const boardSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-router.post("/", boardsController.createBoard);
+// router.post("/", boardsController.createBoard);
 
 module.exports = mongoose.model("Board", boardSchema);
